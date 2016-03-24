@@ -1,0 +1,7 @@
+android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+//
+requestWindowFeature(Window.FEATURE_NO_TITLE);
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
+http://libufan.sinaapp.com/?p=55
