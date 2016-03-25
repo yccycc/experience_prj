@@ -9,6 +9,7 @@ import com.yctech.myapp.R;
 public class DrawView extends View {
     private Paint mPaint = new Paint();
     private Bitmap mBitmap;
+    private RectF  mRectF = new RectF();
 
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -18,18 +19,21 @@ public class DrawView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        mPaint.setColor(Color.RED);
-        //设置字体大小
-        mPaint.setTextSize(100);
-        //设置画出的线的 粗细程度
-        mPaint.setStrokeWidth(5);
-        //draw circle
-        //让画出的图形是空心的
-        //mPaint.setStyle(Paint.Style.STROKE);
-        //实心
+// 设置画笔相关属性
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.rgb(0xe9, 0xe9, 0xe9));
+        canvas.drawColor(Color.TRANSPARENT);
+        mPaint.setStrokeWidth(200);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(getWidth()/2, getHeight()/2, 100, mPaint);
-        //
+        // 位置
+        mRectF.left = 10; // 左上角x
+        mRectF.top = 10; // 左上角y
+        mRectF.right = 100; // 左下角x
+        mRectF.bottom =100; // 右下角y
+
+        // 绘制圆圈，进度条背景
+        canvas.drawArc(mRectF, 0, 60, true, mPaint);
+
+        canvas.drawArc(mRectF, 60, 60, true, mPaint);
     }
 }
