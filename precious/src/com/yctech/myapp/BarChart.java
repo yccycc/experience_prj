@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -17,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 public class BarChart extends Activity {
     private GraphicalView mChartView;
-
-    public void back(View v) {
-    }
 
     protected void setChartSettings(XYMultipleSeriesRenderer renderer,
                                     String title, String xTitle, String yTitle, double xMin,
@@ -74,23 +70,22 @@ public class BarChart extends Activity {
         LinearLayout mLinear = (LinearLayout) findViewById(R.id.chart);
         mLinear.setBackgroundColor(Color.BLACK);
 
-        String[] titles = new String[] { "2016" };
+        String[] titles = new String[] { "2016","2017" };
         List<double[]> values = new ArrayList<double[]>();
-        values.add(new double[] { 100,10 });
-        int[] colors = new int[] { Color.RED };
+        values.add(new double[] { 100});
+        values.add(new double[] { 50});
+        int[] colors = new int[] { Color.RED,Color.BLUE};
         XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);// 柱形图颜色设置
-        setChartSettings(renderer, "工单", "种类", "数量", 0.5, 2.5, 0, 120,
+
+        setChartSettings(renderer, "", "", "", 1, 20,0, 120,
                 Color.GRAY, Color.LTGRAY);// 设置柱形图标题，横轴（X轴）、纵轴（Y轴）、最小的伸所刻度、最大的伸所刻度
         renderer.getSeriesRendererAt(0).setDisplayChartValues(true);// 在第0条柱形图上显示数据
-        renderer.setXLabels(12);
+        renderer.getSeriesRendererAt(1).setDisplayChartValues(true);
+        renderer.setXLabels(10);
         renderer.setYLabels(10);
         renderer.setXLabelsAlign(Paint.Align.LEFT);// 数据从左到右显示
         renderer.setYLabelsAlign(Paint.Align.LEFT);
-        renderer.setPanEnabled(true, false);
-        renderer.setZoomEnabled(true);
-        renderer.setZoomButtonsVisible(true);// 显示放大缩小功能按钮
-        renderer.setZoomRate(1.1f);
-        renderer.setBarSpacing(0.5f);// 柱形图间隔
+        renderer.setBarSpacing(0.1);// 柱形图间隔
 
         if (mChartView == null) {// 构建柱形图
             mChartView = ChartFactory.getBarChartView(getApplicationContext(),

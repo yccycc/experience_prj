@@ -1,40 +1,3 @@
-ldpi：240x320
-
-mdpi：320x480
-hdpi：480x800、480x854
-xhdpi：至少960*720
-xxhdpi：1280×720
-//  // TODO Auto-generated method stub
-
-  mPaint.setColor(Color.RED);
-  //设置字体大小
-  mPaint.setTextSize(100);
-
-  //让画出的图形是空心的
-  mPaint.setStyle(Paint.Style.STROKE);
-  //设置画出的线的 粗细程度
-  mPaint.setStrokeWidth(5);
-  //画出一根线
-  canvas.drawLine(0, 0, 200, 800, mPaint);
-
-  //画矩形
-  canvas.drawRect(200, 300, 300, 320, mPaint);
-
-  //画圆
-  canvas.drawCircle(200, 800, 100, mPaint);
-  //画出字符串 drawText(String text, float x, float y, Paint paint)
-  // y 是 基准线 ，不是 字符串的 底部
-  canvas.drawText("apple", 60, 600, mPaint);
-  canvas.drawLine(60, 60, 500, 60, mPaint);
-
-  //绘制图片
-  canvas.drawBitmap(mBitmap, 150, 150, mPaint);
-//
-  mPaint.setColor(Color.RED);
-        //实心
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(getWidth()/2, getHeight()/2, 100, mPaint);
-        ??????????????????????????????????????????????
 package com.yctech.myapp;
 
 import android.app.Activity;
@@ -57,26 +20,27 @@ public class SimpleBarChart extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_bar_chart);
 
-        String[] titles = new String[] { "2008", "2007" };
+        String[] titles = new String[] { "待处理", "待上传" };
         List<double[]> values = new ArrayList<double[]>();
-        values.add(new double[] { 14230, 12300, 14240, 15244, 15900, 19200, 22030, 21200, 19500, 15500,
-                12600, 14000 });
-        values.add(new double[] { 5230, 7300, 9240, 10540, 7900, 9200, 12030, 11200, 9500, 10500,
-                11600, 13500 });
+        values.add(new double[] { 185 });
+        values.add(new double[] { 10 });
         int[] colors = new int[] { Color.BLUE, Color.CYAN };
         XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
-        setChartSettings(renderer, "Monthly sales in the last 2 years", "Month", "Units sold", 0.5,
-                12.5, 0, 24000, Color.GRAY, Color.LTGRAY);
+        setChartSettings(renderer, "工单结果", "类型", "数量", 0,
+                2, 0, 200, Color.GRAY, Color.LTGRAY);
         ((XYSeriesRenderer) renderer.getSeriesRendererAt(0)).setDisplayChartValues(true);
         ((XYSeriesRenderer) renderer.getSeriesRendererAt(1)).setDisplayChartValues(true);
-        renderer.setXLabels(12);
+        renderer.setXLabels(1);
         renderer.setYLabels(10);
         renderer.setXLabelsAlign(Paint.Align.LEFT);
         renderer.setYLabelsAlign(Paint.Align.LEFT);
+        renderer.removeXTextLabel(2);
+        renderer.setXLabelsColor(Color.TRANSPARENT);
         renderer.setPanEnabled(true, false);
         // renderer.setZoomEnabled(false);
-        renderer.setZoomRate(1.1f);
-        renderer.setBarSpacing(0.5f);
+        renderer.setZoomRate(5.1f);
+        renderer.setBarSpacing(10.0f);
+        renderer.setBarWidth(50);
         View view = ChartFactory.getBarChartView(getApplicationContext(),
                 buildBarDataset(titles, values), renderer, org.achartengine.chart.BarChart.Type.DEFAULT);
         renderer.setClickEnabled(true);
@@ -125,6 +89,3 @@ public class SimpleBarChart extends Activity {
     }
 
 }
-?????????????????????????????????????????????????????????????????????????????????????????????
-
-
