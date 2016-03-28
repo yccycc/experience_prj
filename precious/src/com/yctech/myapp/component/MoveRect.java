@@ -34,7 +34,6 @@ public class MoveRect extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i("goddess",count+"--onDraw--"+Thread.currentThread());
         mCanvas = canvas;
         mPaint.setColor(Color.BLUE);
 
@@ -47,13 +46,14 @@ public class MoveRect extends View {
             for (;;)
             {
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        Log.i("goddess",count+"--onDraw--"+Thread.currentThread());
                         if(null!=mCanvas)
                         {
                             if(count >= 300)
