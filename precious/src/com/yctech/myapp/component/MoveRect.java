@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class MoveRect extends View {
@@ -50,21 +49,15 @@ public class MoveRect extends View {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("goddess",count+"--onDraw--"+Thread.currentThread());
-                        if(null!=mCanvas)
-                        {
-                            if(count >= 300)
-                            {
-                                count = 10;
-                            }
-                            mCanvas.drawRect(0, 0, 100,count++, mPaint);
-                            MoveRect.this.invalidate();
-                        }
+                if(null!=mCanvas)
+                {
+                    if(count >= 300)
+                    {
+                        count = 10;
                     }
-                });
+                    mCanvas.drawRect(0, 0, 100,count++, mPaint);
+                    MoveRect.this.postInvalidate();
+                }
             }
         }
     }
