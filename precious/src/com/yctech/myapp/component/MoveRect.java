@@ -38,7 +38,6 @@ public class MoveRect extends View {
         mCanvas = canvas;
         mPaint.setColor(Color.BLUE);
 
-        canvas.drawRect(0, 0, 100,count++, mPaint);
         //MoveRect.this.invalidate();
     }
     class MoveThread extends Thread{
@@ -48,7 +47,7 @@ public class MoveRect extends View {
             for (;;)
             {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -57,6 +56,10 @@ public class MoveRect extends View {
                     public void run() {
                         if(null!=mCanvas)
                         {
+                            if(count >= 300)
+                            {
+                                count = 10;
+                            }
                             mCanvas.drawRect(0, 0, 100,count++, mPaint);
                             MoveRect.this.invalidate();
                         }
