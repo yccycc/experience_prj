@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ public class MoveRect extends View {
     private Paint mPaint;
     private Canvas mCanvas;
     private int count = 5;
+    private Handler mHandler;
     public MoveRect(Context context) {
         super(context);
         init();
@@ -25,6 +27,8 @@ public class MoveRect extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
+        mHandler = new Handler();
+        new MoveThread().start();
     }
 
     @Override
@@ -35,23 +39,30 @@ public class MoveRect extends View {
         mPaint.setColor(Color.BLUE);
 
         canvas.drawRect(0, 0, 100,count++, mPaint);
-        MoveRect.this.invalidate();
-
+        //MoveRect.this.invalidate();
     }
-//    class MoveThread extends Thread{
-//        @Override
-//        public void run() {
-//            super.run();
-//            for (;;)
-//            {
-//                try {
-//                    Thread.sleep(10);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                mCanvas.drawRect(0, 0, 100,count++, mPaint);
-//                MoveRect.this.initialize();
-//            }
-//        }
-//    }
+    class MoveThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            for (;;)
+            {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(null!=mCanvas)
+                        {
+                            mCanvas.drawRect(0, 0, 100,count++, mPaint);
+                            MoveRect.this.invalidate();
+                        }
+                    }
+                });
+            }
+        }
+    }
 }
