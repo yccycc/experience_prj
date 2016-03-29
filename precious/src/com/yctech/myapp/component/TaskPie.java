@@ -20,6 +20,13 @@ public class TaskPie extends View {
             mOutSideLen+2*(mInnerSideLen+mMidSideLen));
     private RectF mOutCircleRect = new RectF(0,0,2*(mMidSideLen+mInnerSideLen+mOutSideLen),
             2*(mInnerSideLen+mMidSideLen+mOutSideLen));
+    private RectF mInnerCircleRect = new RectF(mMidSideLen+mOutSideLen,mMidSideLen+mOutSideLen,
+            2*mInnerSideLen+mMidSideLen+mOutSideLen,
+            2*mInnerSideLen+mMidSideLen+mOutSideLen);
+    private int mPartCircleBeginAngle = 130;
+    private int mCircleAngleIncrement = 280/18;
+    private int mDoneSectorNums = 6;
+    private int mSectorColorSet[] ={Color.YELLOW,Color.BLUE};
     public TaskPie(Context context) {
         super(context);
     }
@@ -36,14 +43,18 @@ public class TaskPie extends View {
         //draw inner circle
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.YELLOW);
-        mCanvas.drawCircle(mInnerCircleX,mInnerCircleY,mInnerCircleRadius,mPaint);
+        mCanvas.drawArc(mInnerCircleRect,0,360,false,mPaint);
         //draw mid circle
-        mCanvas.drawArc(mMidCircleRect,130,280,false,mPaint);
+        mCanvas.drawArc(mMidCircleRect,mPartCircleBeginAngle,280,false,mPaint);
         //draw out circle
-        mCanvas.drawArc(mOutCircleRect,130,280,false,mPaint);
+        mCanvas.drawArc(mOutCircleRect,mPartCircleBeginAngle,280,false,mPaint);
         //draw sector
         mPaint.setStyle(Paint.Style.FILL);
-        mCanvas.drawArc(mMidCircleRect,130,280,true,mPaint);
+        for(int i =0;i<mDoneSectorNums;i++)
+        {
+            mPaint.setColor(mSectorColorSet[i%2]);
+            mCanvas.drawArc(mMidCircleRect,mPartCircleBeginAngle+mCircleAngleIncrement*i,mCircleAngleIncrement,true,mPaint);
+        }
     }
 
 }
