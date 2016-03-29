@@ -4,20 +4,22 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class TaskPie extends View {
-    private int mCountDownTextMl = 252;
-    private int mCountDownTextMt = 513;
-    private String mCountDownDay = "3";
+    private int mOutSideLen = 10;
+    private int mMidSideLen = 80;
+    private int mInnerSideLen = 30;
+    private int mInnerCircleRadius = mInnerSideLen;
+    private int mInnerCircleX= mOutSideLen+mMidSideLen+mInnerSideLen,mInnerCircleY = mInnerCircleX;
     private Paint mPaint = new Paint();
     private Canvas mCanvas;
-    private int mCircleX = 360;
-    private int mCircleY = 286;
-    private int mInsideCircleRadius = 53;
-    private int mOutsideCircleRadius = 180;
-    private int mMidCircleRadius = 170;
+    private RectF mMidCircleRect = new RectF(mOutSideLen,mOutSideLen,mOutSideLen+2*(mMidSideLen+mInnerSideLen),
+            mOutSideLen+2*(mInnerSideLen+mMidSideLen));
+    private RectF mOutCircleRect = new RectF(0,0,2*(mMidSideLen+mInnerSideLen+mOutSideLen),
+            2*(mInnerSideLen+mMidSideLen+mOutSideLen));
     public TaskPie(Context context) {
         super(context);
     }
@@ -31,77 +33,17 @@ public class TaskPie extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mCanvas = canvas;
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setTextSize(20);
-        mCanvas.drawText("距离抄表截止日还有",mCountDownTextMl,mCountDownTextMt,mPaint);
-        //
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.RED);
-        mPaint.setTextSize(25);
-        mCanvas.drawText(mCountDownDay+"",185+mCountDownTextMl,mCountDownTextMt,mPaint);
-        //
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(20);
-        mCanvas.drawText("天",202+mCountDownTextMl,mCountDownTextMt,mPaint);
-        //
+        //draw inner circle
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.YELLOW);
-        mCanvas.drawCircle(mCircleX,mCircleY,mInsideCircleRadius,mPaint);
-        //
+        mCanvas.drawCircle(mInnerCircleX,mInnerCircleY,mInnerCircleRadius,mPaint);
+        //draw mid circle
+        mCanvas.drawArc(mMidCircleRect,130,280,false,mPaint);
+        //draw out circle
+        mCanvas.drawArc(mOutCircleRect,130,280,false,mPaint);
+        //draw sector
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.YELLOW);
-        mCanvas.drawText("97%",347,290,mPaint);
+        mCanvas.drawArc(mMidCircleRect,130,280,true,mPaint);
     }
 
-
-
-
-
-
-
-
-
-
-    public int getmCountDownTextMl() {
-        return mCountDownTextMl;
-    }
-
-    public void setmCountDownTextMl(int mCountDownTextMl) {
-        this.mCountDownTextMl = mCountDownTextMl;
-    }
-
-    public int getmCountDownTextMt() {
-        return mCountDownTextMt;
-    }
-
-    public void setmCountDownTextMt(int mCountDownTextMt) {
-        this.mCountDownTextMt = mCountDownTextMt;
-    }
-
-    public Paint getmPaint() {
-        return mPaint;
-    }
-
-    public void setmPaint(Paint mPaint) {
-        this.mPaint = mPaint;
-    }
-
-    public Canvas getmCanvas() {
-        return mCanvas;
-    }
-
-    public String getmCountDownDay() {
-        return mCountDownDay;
-    }
-
-    public void setmCountDownDay(String mCountDownDay) {
-        this.mCountDownDay = mCountDownDay;
-        postInvalidate();
-    }
-
-    public void setmCanvas(Canvas mCanvas) {
-        this.mCanvas = mCanvas;
-    }
 }
