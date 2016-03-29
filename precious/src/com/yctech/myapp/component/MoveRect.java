@@ -34,7 +34,7 @@ public class MoveRect extends View {
         mPaint.setAntiAlias(true);
         mHandler = new Handler();
         new MoveThread().start();
-        setBackgroundColor(Color.YELLOW);
+        setBackgroundColor(Color.WHITE);
         //
         rectF = new RectF(200,0,400,200);
     }
@@ -47,11 +47,11 @@ public class MoveRect extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mCanvas.drawRect(0, 0, 100, count++, mPaint);
         mPaint.setStyle(Paint.Style.STROKE);
-        mCanvas.drawArc(rectF,0,360,false,mPaint);
+        mCanvas.drawArc(rectF,0,280,false,mPaint);
     }
 
     class MoveThread extends Thread {
-        float strokeWids[] ={1.0f,3.0f};
+        float strokeWids[] ={1.0f,2.0f};
         int i =0;
         @Override
         public void run() {

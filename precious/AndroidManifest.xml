@@ -17,6 +17,8 @@
         <activity android:name=".SimpleBarChart">
         </activity>
         <activity android:name=".Canvas2">
+        </activity>
+        <activity android:name=".TaskPercent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
