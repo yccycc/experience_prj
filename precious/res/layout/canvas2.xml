@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <com.yctech.myapp.component.MoveRect
+    <com.yctech.myapp.component.GameUI
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
     <Button

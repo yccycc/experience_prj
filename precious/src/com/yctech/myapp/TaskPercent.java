@@ -10,6 +10,6 @@ public class TaskPercent extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.task_percent);
+        setContentView(R.layout.canvas2);
     }
 }
