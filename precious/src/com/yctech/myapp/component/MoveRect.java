@@ -48,6 +48,13 @@ public class MoveRect extends View {
         mCanvas.drawRect(0, 0, 100, count++, mPaint);
         mPaint.setStyle(Paint.Style.STROKE);
         mCanvas.drawArc(rectF,0,280,false,mPaint);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                mCanvas.drawArc(rectF,0,280,false,mPaint);
+            }
+        }.start();
     }
 
     class MoveThread extends Thread {

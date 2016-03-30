@@ -1,10 +1,7 @@
 package com.yctech.myapp.component;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -40,11 +37,12 @@ public class TaskPie extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mCanvas = canvas;
-        //draw inner circle
+        mPaint.setAntiAlias(true);
+        mPaint.setDither(true);
+        mPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.SOLID));
+        //draw mid circle
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.YELLOW);
-        mCanvas.drawArc(mInnerCircleRect,0,360,false,mPaint);
-        //draw mid circle
         mCanvas.drawArc(mMidCircleRect,mPartCircleBeginAngle,280,false,mPaint);
         //draw out circle
         mCanvas.drawArc(mOutCircleRect,mPartCircleBeginAngle,280,false,mPaint);
@@ -55,6 +53,10 @@ public class TaskPie extends View {
             mPaint.setColor(mSectorColorSet[i%2]);
             mCanvas.drawArc(mMidCircleRect,mPartCircleBeginAngle+mCircleAngleIncrement*i,mCircleAngleIncrement,true,mPaint);
         }
+        //draw inner circle
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.BLACK);
+        mCanvas.drawArc(mInnerCircleRect,0,360,false,mPaint);
     }
 
 }

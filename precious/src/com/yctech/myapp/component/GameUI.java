@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -89,5 +90,6 @@ public class GameUI extends SurfaceView implements SurfaceHolder.Callback {
             count = 10;
         }
         canvas.drawRect(0, 0, 100, count++, mPaint);
+        Log.i("goddess",Thread.currentThread().toString());
     }
 }
