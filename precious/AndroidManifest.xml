@@ -19,6 +19,8 @@
         <activity android:name=".Canvas2">
         </activity>
         <activity android:name=".TaskPercent">
+        </activity>
+        <activity android:name=".calendar.CalendarTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

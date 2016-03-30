@@ -26,7 +26,8 @@ public class TaskPercent extends Activity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMr.drawNotInOndraw();
+                mMr.drawNotInOndraw1();
+                mMr.drawNotInOndraw2();
             }
         });
     }

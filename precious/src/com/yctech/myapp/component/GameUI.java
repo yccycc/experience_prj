@@ -93,12 +93,21 @@ public class GameUI extends SurfaceView implements SurfaceHolder.Callback {
         Log.i("goddess",Thread.currentThread().toString());
     }
 
-    public void drawNotInOndraw()
+    public void drawNotInOndraw1()
     {
         Canvas canvas = holder.lockCanvas();
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(0, 0, 100, count++, mPaint);
+        canvas.drawRect(0, 0, 10, count++, mPaint);
+        holder.unlockCanvasAndPost(canvas);
+    }
+
+    public void drawNotInOndraw2()
+    {
+        Canvas canvas = holder.lockCanvas();
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(50, 50, 100, count++, mPaint);
         holder.unlockCanvasAndPost(canvas);
     }
 }
