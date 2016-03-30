@@ -25,6 +25,8 @@
         <activity android:name=".test.WaveViewTest">
         </activity>
         <activity android:name=".test.MatrixTest">
+        </activity>
+        <activity android:name=".test.SpinnerTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
