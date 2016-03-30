@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,7 +14,6 @@ public class MoveRect extends View {
     private Paint mPaint;
     private Canvas mCanvas;
     private int count = 5;
-    private Handler mHandler;
     private RectF rectF;
     private float strokeWid;
 
@@ -32,8 +30,7 @@ public class MoveRect extends View {
     protected void init() {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mHandler = new Handler();
-        new MoveThread().start();
+        //new MoveThread().start();
         setBackgroundColor(Color.WHITE);
         //
         rectF = new RectF(200,0,400,200);
@@ -43,18 +40,14 @@ public class MoveRect extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mCanvas = canvas;
+        Log.i("goddessmCanvas",mCanvas.toString());
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.FILL);
-        mCanvas.drawRect(0, 0, 100, count++, mPaint);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mCanvas.drawArc(rectF,0,280,false,mPaint);
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                mCanvas.drawArc(rectF,0,280,false,mPaint);
-            }
-        }.start();
+        mCanvas.drawRect(100, 100, 200, 200, mPaint);
+//        mPaint.setStyle(Paint.Style.STROKE);
+//        mCanvas.drawArc(rectF,0,280,false,mPaint);
+ //       drawNotInOndraw();
+        Log.i("goddess",count+"");
     }
 
     class MoveThread extends Thread {
@@ -79,8 +72,21 @@ public class MoveRect extends View {
                 }
                 mPaint.setStrokeWidth(strokeWid);
                 MoveRect.this.postInvalidate();
+                if(null!=mCanvas)
+                {
+                    //break;
+                }
             }
         }
+    }
+    public void drawNotInOndraw()
+    {
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.FILL);
+        mCanvas.drawRect(0, 0, 100, count++, mPaint);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mCanvas.drawArc(rectF,0,280,false,mPaint);
+        MoveRect.this.invalidate();
     }
 
     @Override

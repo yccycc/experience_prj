@@ -61,7 +61,7 @@ public class GameUI extends SurfaceView implements SurfaceHolder.Callback {
         public void run() {
             // 不停绘制界面
             while (isDraw) {
-                drawUI();
+               // drawUI();
             }
             super.run();
         }
@@ -91,5 +91,14 @@ public class GameUI extends SurfaceView implements SurfaceHolder.Callback {
         }
         canvas.drawRect(0, 0, 100, count++, mPaint);
         Log.i("goddess",Thread.currentThread().toString());
+    }
+
+    public void drawNotInOndraw()
+    {
+        Canvas canvas = holder.lockCanvas();
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(0, 0, 100, count++, mPaint);
+        holder.unlockCanvasAndPost(canvas);
     }
 }
