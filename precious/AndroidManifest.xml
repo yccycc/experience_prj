@@ -21,6 +21,10 @@
         <activity android:name=".TaskPercent">
         </activity>
         <activity android:name=".calendar.CalendarTest">
+        </activity>
+        <activity android:name=".test.WaveViewTest">
+        </activity>
+        <activity android:name=".test.MatrixTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
