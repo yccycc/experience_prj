@@ -27,6 +27,8 @@
         <activity android:name=".test.MatrixTest">
         </activity>
         <activity android:name=".test.SpinnerTest">
+        </activity>
+        <activity android:name=".test.ToDealGdManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
